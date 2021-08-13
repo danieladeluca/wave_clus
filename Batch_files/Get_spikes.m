@@ -104,7 +104,7 @@ run_parfor = parallel;
 if parallel
     if exist('matlabpool','file')   % old versions of Matlab have the matlabpool function
         try 
-            matlabpool('open');     % If a matlabpool is already open 
+            parpool('local');     % If a matlabpool is already open 
         catch                       % will throw a error and catch here.
             parallel = false;
         end
@@ -139,7 +139,7 @@ end
 % if a pool was open, close it
 if parallel == true
     if exist('matlabpool','file')
-        matlabpool('close')
+        delete(p);
     else
         poolobj = gcp('nocreate');
         delete(poolobj);

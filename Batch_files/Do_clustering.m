@@ -147,7 +147,7 @@ if make_times
     if parallel == true
         if exist('matlabpool','file')
             try
-                matlabpool('open');
+                parpool('local');
             catch
                 parallel = false;
             end
@@ -180,7 +180,7 @@ if make_times
     end
     if parallel == true
         if exist('matlabpool','file')
-            matlabpool('close')
+            delete(p);
         else
             poolobj = gcp('nocreate');
             delete(poolobj);
